@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search | blog.chiranjeevi.tech</title>
+    <meta name="description" content="Search cybersecurity content by title, category, and tags." />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body data-page="search">
+    <header class="site-header">
+      <a class="brand" href="../../index.html">0xStr1k3r</a>
+      <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">Menu</button>
+      <nav id="site-nav" class="site-nav">
+        <a href="../../index.html">Home</a>
+        <a href="./writeups.html">Writeups</a>
+        <a href="./research.html">Research</a>
+        <a href="./tools.html">Tools</a>
+        <a href="./cheatsheets.html">Cheat Sheets</a>
+        <a href="./projects.html">Projects</a>
+        <a href="./resources.html">Resources</a>
+        <a href="./tags.html">Tags</a>
+        <a href="./search.html">Search</a>
+        <a href="./about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="hero hero-compact">
+        <p class="hero-kicker">Find Anything</p>
+        <h1>Search</h1>
+        <p>Search titles, tags, and categories across all content sections.</p>
+      </section>
+
+      <section class="panel">
+        <label class="search-label" for="search-input">Search query</label>
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          placeholder="Try: xss, recon, nmap, htb, web exploitation..."
+        />
+        <p id="search-count" class="meta-line">Type to search content.</p>
+        <div id="search-results" class="card-grid"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-copy">© <span id="year"></span> blog.chiranjeevi.tech</p>
+      <div id="footer-links" class="footer-links"></div>
+    </footer>
+
+    <script src="../js/site.js"></script>
+    <script src="../js/content.js"></script>
+  </body>
+</html>
