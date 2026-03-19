@@ -13,10 +13,25 @@
 
   if (menuToggle && nav) {
     menuToggle.addEventListener("click", () => {
-      nav.classList.toggle("open");
+      const isOpen = nav.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.textContent = isOpen ? "Close" : "Menu";
     });
     nav.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => nav.classList.remove("open"));
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "Menu";
+      });
+    });
+    
+    // Close menu on escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && nav.classList.contains("open")) {
+        nav.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "Menu";
+      }
     });
   }
 
@@ -38,6 +53,31 @@
   if (year) {
     year.textContent = String(new Date().getFullYear());
   }
+  
+  // Smooth scroll header hide/show on scroll
+  let lastScrollY = window.scrollY;
+  const header = document.querySelector(".site-header");
+  if (header) {
+    window.addEventListener("scroll", () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        header.style.transform = "translateY(-120%)";
+        header.style.opacity = "0";
+      } else {
+        header.style.transform = "translateY(0)";
+        header.style.opacity = "1";
+      }
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+    header.style.transition = "transform 300ms cubic-bezier(0.4, 0, 0.2, 1), opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)";
+  }
+  
+  // Add hover effect to skill chips with stagger
+  const skillChips = document.querySelectorAll(".skill-chip");
+  skillChips.forEach((chip, index) => {
+    chip.style.animationDelay = `${index * 80}ms`;
+    chip.classList.add("reveal");
+  });
 
   const footerLinks = document.getElementById("footer-links");
   if (footerLinks) {
@@ -75,10 +115,10 @@
     ];
 
     footerLinks.innerHTML = social
-      .map((item) => {
+      .map((item, index) => {
         const external = item.href.startsWith("http");
         const target = external ? ' target="_blank" rel="noopener noreferrer"' : "";
-        return `<a class="footer-link" href="${item.href}"${target}>${item.icon}<span>${item.label}</span></a>`;
+        return `<a class="footer-link" href="${item.href}"${target} style="animation-delay: ${index * 50}ms">${item.icon}<span>${item.label}</span></a>`;
       })
       .join("");
   }
