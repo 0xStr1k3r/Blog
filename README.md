@@ -8,7 +8,7 @@ I use this space to share practical writeups, research notes, tools, and project
 
 I’m a cybersecurity engineer focused on hands-on security work and continuous learning.
 
-Portfolio: [chiranjeevi.tech](https://chiranjeevi.tech)
+Portfolio: [0xchiru.dev](https://0xchiru.dev)
 
 ## What I Share Here
 
