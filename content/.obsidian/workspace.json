@@ -1,0 +1,179 @@
+{
+  "main": {
+    "id": "cf9008faaa668601",
+    "type": "split",
+    "children": [
+      {
+        "id": "9262cf8e85ec415f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3346e2ae5d40eabd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "writeups/TryHack3M Bricks Heist.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "TryHack3M Bricks Heist"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ce27e2339d6db7f7",
+    "type": "split",
+    "children": [
+      {
+        "id": "23d1e4d4e75a3c5a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1a941bcdc2c050c6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "f8904ccda6f1b581",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "9e597071ea4415d9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "241b0ea9e1f42540",
+    "type": "split",
+    "children": [
+      {
+        "id": "fcea3c2c37776c3e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b9a725f26fdb22f0",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "writeups/TryHack3M Bricks Heist.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for TryHack3M Bricks Heist"
+            }
+          },
+          {
+            "id": "d58f5708caf40dac",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "writeups/TryHack3M Bricks Heist.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from TryHack3M Bricks Heist"
+            }
+          },
+          {
+            "id": "f63feec61428fb6d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "f077ae298220d32a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "writeups/TryHack3M Bricks Heist.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of TryHack3M Bricks Heist"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "3346e2ae5d40eabd",
+  "lastOpenFiles": [
+    "images/Pasted image 20260319194955.png",
+    "images/Pasted image 20260319194544.png",
+    "writeups/TryHack3M Bricks Heist.md",
+    "images"
+  ]
+}

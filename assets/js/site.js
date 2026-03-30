@@ -54,11 +54,13 @@
     year.textContent = String(new Date().getFullYear());
   }
   
-  // Smooth scroll header hide/show on scroll
+  // Enhanced smooth scroll header hide/show with throttling
   let lastScrollY = window.scrollY;
+  let ticking = false;
   const header = document.querySelector(".site-header");
+  
   if (header) {
-    window.addEventListener("scroll", () => {
+    const updateHeader = () => {
       const currentScrollY = window.scrollY;
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         header.style.transform = "translateY(-120%)";
@@ -68,17 +70,26 @@
         header.style.opacity = "1";
       }
       lastScrollY = currentScrollY;
+      ticking = false;
+    };
+    
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
     }, { passive: true });
+    
     header.style.transition = "transform 300ms cubic-bezier(0.4, 0, 0.2, 1), opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)";
   }
   
-  // Add hover effect to skill chips with stagger
+  // Add staggered animation to skill chips
   const skillChips = document.querySelectorAll(".skill-chip");
   skillChips.forEach((chip, index) => {
     chip.style.animationDelay = `${index * 80}ms`;
-    chip.classList.add("reveal");
   });
 
+  // Footer social links with stagger
   const footerLinks = document.getElementById("footer-links");
   if (footerLinks) {
     const social = [
@@ -118,11 +129,12 @@
       .map((item, index) => {
         const external = item.href.startsWith("http");
         const target = external ? ' target="_blank" rel="noopener noreferrer"' : "";
-        return `<a class="footer-link" href="${item.href}"${target} style="animation-delay: ${index * 50}ms">${item.icon}<span>${item.label}</span></a>`;
+        return `<a class="footer-link" href="${item.href}"${target} style="animation-delay: ${index * 60}ms">${item.icon}<span>${item.label}</span></a>`;
       })
       .join("");
   }
 
+  // Enhanced typing animation
   const typingTarget = document.getElementById("typing-text");
   if (typingTarget) {
     const lines = [
@@ -154,10 +166,10 @@
           typingTarget.textContent = line.slice(0, charIndex);
           if (charIndex >= line.length) {
             deleting = true;
-            timer = window.setTimeout(step, 1200);
+            timer = window.setTimeout(step, 1500);
             return;
           }
-          timer = window.setTimeout(step, 55);
+          timer = window.setTimeout(step, 50);
           return;
         }
 
@@ -166,10 +178,10 @@
         if (charIndex <= 0) {
           deleting = false;
           lineIndex = (lineIndex + 1) % lines.length;
-          timer = window.setTimeout(step, 230);
+          timer = window.setTimeout(step, 200);
           return;
         }
-        timer = window.setTimeout(step, 32);
+        timer = window.setTimeout(step, 30);
       };
 
       step();
@@ -183,6 +195,7 @@
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Enhanced intersection observer with performance optimizations
   const applyRevealToNewContent = () => {
     const revealTargets = document.querySelectorAll(".hero,.panel,.card");
     if (reduceMotion) {
@@ -197,16 +210,19 @@
 
     if (!window.__siteRevealObserver) {
       window.__siteRevealObserver = new IntersectionObserver(
-        (entries, observer) => {
+        (entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) {
               return;
             }
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
+            // Use requestAnimationFrame for smoother animations
+            window.requestAnimationFrame(() => {
+              entry.target.classList.add("is-visible");
+            });
+            window.__siteRevealObserver.unobserve(entry.target);
           });
         },
-        { threshold: 0.12, rootMargin: "0px 0px -5% 0px" }
+        { threshold: 0.1, rootMargin: "0px 0px -8% 0px" }
       );
     }
 
@@ -218,6 +234,21 @@
     });
   };
 
+  // Add smooth page load animation
+  document.documentElement.style.opacity = "0";
+  window.addEventListener("DOMContentLoaded", () => {
+    window.requestAnimationFrame(() => {
+      document.documentElement.style.transition = "opacity 400ms ease";
+      document.documentElement.style.opacity = "1";
+    });
+  });
+
   window.applyRevealToNewContent = applyRevealToNewContent;
-  applyRevealToNewContent();
+  
+  // Defer reveal animations until after page is visible
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", applyRevealToNewContent);
+  } else {
+    applyRevealToNewContent();
+  }
 })();

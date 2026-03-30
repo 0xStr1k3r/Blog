@@ -354,10 +354,86 @@ async function renderPostPage() {
     return;
   }
 
+  // Update page title and basic elements
   title.textContent = entry.title;
   breadcrumb.innerHTML = `<a href="${pageUrl(`${category}.html`)}">${escapeHtml(categoryLabel(category))}</a>`;
   meta.textContent = `${categoryLabel(category)} · ${formatDate(entry.date)}`;
   tags.innerHTML = renderTags(entry);
+
+  // Update SEO meta tags
+  const pageTitle = `${entry.title} | ${categoryLabel(category)} - 0xStr1k3r`;
+  const pageDescription = entry.description || `${entry.title} - A cybersecurity ${category} article by 0xStr1k3r`;
+  const pageUrl = `https://blog.0xchiru.dev/assets/html/post.html?category=${category}&slug=${slug}`;
+  const pageKeywords = entry.tags ? entry.tags.join(", ") : "cybersecurity, penetration testing, ethical hacking";
+  
+  // Update document title
+  document.title = pageTitle;
+  
+  // Update basic meta tags
+  const descMeta = document.getElementById("post-description");
+  if (descMeta) descMeta.setAttribute("content", pageDescription);
+  
+  const keywordsMeta = document.getElementById("post-keywords");
+  if (keywordsMeta) keywordsMeta.setAttribute("content", pageKeywords);
+  
+  const canonicalLink = document.getElementById("post-canonical");
+  if (canonicalLink) canonicalLink.setAttribute("href", pageUrl);
+  
+  // Update Open Graph tags
+  const ogUrl = document.getElementById("og-url");
+  if (ogUrl) ogUrl.setAttribute("content", pageUrl);
+  
+  const ogTitle = document.getElementById("og-title");
+  if (ogTitle) ogTitle.setAttribute("content", entry.title);
+  
+  const ogDesc = document.getElementById("og-description");
+  if (ogDesc) ogDesc.setAttribute("content", pageDescription);
+  
+  // Update article dates
+  const articlePublished = document.getElementById("article-published");
+  if (articlePublished && entry.date) {
+    articlePublished.setAttribute("content", new Date(entry.date).toISOString());
+  }
+  
+  const articleModified = document.getElementById("article-modified");
+  if (articleModified && entry.date) {
+    articleModified.setAttribute("content", new Date(entry.date).toISOString());
+  }
+  
+  // Update Twitter Card tags
+  const twitterTitle = document.getElementById("twitter-title");
+  if (twitterTitle) twitterTitle.setAttribute("content", entry.title);
+  
+  const twitterDesc = document.getElementById("twitter-description");
+  if (twitterDesc) twitterDesc.setAttribute("content", pageDescription);
+  
+  // Update JSON-LD structured data
+  const schemaScript = document.getElementById("schema-blogposting");
+  if (schemaScript && entry.date) {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": entry.title,
+      "description": pageDescription,
+      "keywords": pageKeywords,
+      "author": {
+        "@type": "Person",
+        "name": "0xStr1k3r",
+        "url": "https://blog.0xchiru.dev/"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "0xStr1k3r"
+      },
+      "datePublished": new Date(entry.date).toISOString(),
+      "dateModified": new Date(entry.date).toISOString(),
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": pageUrl
+      }
+    };
+    schemaScript.textContent = JSON.stringify(schema, null, 2);
+  }
 
   if (backBtn instanceof HTMLButtonElement) {
     backBtn.onclick = () => {
